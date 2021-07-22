@@ -38,6 +38,7 @@ namespace DotnetCoreMiddlewareSample
             }
 
             app.UseMiddleware<MiddlewareForRequestLogging>();
+            app.UseMiddleware<MiddlewareForResponseLogging>();
 
             app.UseHttpsRedirection();
 
