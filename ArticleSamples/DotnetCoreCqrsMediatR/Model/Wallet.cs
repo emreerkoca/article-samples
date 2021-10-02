@@ -11,6 +11,7 @@ namespace DotnetCoreCqrsMediatR.Model
         public OperationType OperationType { get; set; }
         public int MoneyType { get; set; }
         public DateTime OperationTime { get; set; }
+        public string PublishedEvents { get; set; }
     }
 
 

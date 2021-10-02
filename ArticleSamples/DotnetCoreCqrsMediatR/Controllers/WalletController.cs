@@ -1,9 +1,15 @@
-﻿using MediatR;
+﻿using DotnetCoreCqrsMediatR.Commands;
+using DotnetCoreCqrsMediatR.Contracts;
+using DotnetCoreCqrsMediatR.Model;
+using DotnetCoreCqrsMediatR.Notifications;
+using DotnetCoreCqrsMediatR.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace DotnetCoreCqrsMediatR.Controllers
@@ -20,9 +26,21 @@ namespace DotnetCoreCqrsMediatR.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] GetWalletRequest getWalletRequest)
         {
-            return Ok(1);
+            var wallets = _mediator.Send(new GetWalletQuery(getWalletRequest));
+
+            return Ok(wallets);
+        }
+
+        [HttpPost] 
+        public async Task<IActionResult> Post([FromBody] Wallet wallet)
+        {
+            var addedWallet = _mediator.Send(new AddWalletCommand(wallet));
+
+            await _mediator.Publish(new WalletChangedEmailNotification(wallet));
+
+            return StatusCode((int)HttpStatusCode.Created, addedWallet);
         }
     }
 }
