@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using DotnetCoreCqrsMediatR.Data;
+using DotnetCoreCqrsMediatR.Behaviours;
 
 namespace DotnetCoreCqrsMediatR
 {
@@ -38,6 +39,7 @@ namespace DotnetCoreCqrsMediatR
             services.AddMediatR(typeof(Startup));
 
             services.AddSingleton<ISampleDataStore, SampleDataStore>();
+            services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggerBehavior<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
