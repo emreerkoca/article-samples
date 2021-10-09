@@ -17,7 +17,7 @@ namespace DotnetCoreCqrsMediatR.Handlers
 
         public async Task Handle(WalletChangedEmailNotification notification, CancellationToken cancellationToken)
         {
-            await _sampleDataStore.EventPublished(notification.wallet, nameof(WalletChangedEmailNotification));
+            await _sampleDataStore.SetPublishedEvent(notification.walletWriteModel, nameof(WalletChangedEmailNotification));
             await Task.CompletedTask;
         }
     }

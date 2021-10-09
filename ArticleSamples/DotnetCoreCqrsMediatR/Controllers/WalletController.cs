@@ -22,19 +22,20 @@ namespace DotnetCoreCqrsMediatR.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery] GetWalletRequest getWalletRequest)
+        public IActionResult Get([FromQuery] GetWalletReadModelRequest getWalletReadModelRequest)
         {
-            var wallets = _mediator.Send(new GetWalletQuery(getWalletRequest));
+            var wallets = _mediator.Send(new GetWalletQuery(getWalletReadModelRequest));
 
             return Ok(wallets);
         }
 
         [HttpPost] 
-        public async Task<IActionResult> Post([FromBody] Wallet wallet)
+        public async Task<IActionResult> Post([FromBody] WalletWriteModel walletWriteModel)
         {
-            var addedWallet = _mediator.Send(new AddWalletCommand(wallet));
+            var addedWallet = _mediator.Send(new AddWalletCommand(walletWriteModel));
 
-            await _mediator.Publish(new WalletChangedEmailNotification(wallet));
+            await _mediator.Publish(new WalletChangedEmailNotification(walletWriteModel));
+            await _mediator.Publish(new WalletReadModelUpdaterNotification(walletWriteModel));
 
             return StatusCode((int)HttpStatusCode.Created, addedWallet);
         }

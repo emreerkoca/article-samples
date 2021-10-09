@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DotnetCoreCqrsMediatR.Handlers
 {
-    public class GetWalletHandler : IRequestHandler<GetWalletQuery, List<Wallet>>
+    public class GetWalletHandler : IRequestHandler<GetWalletQuery, List<WalletReadModel>>
     {
         private readonly ISampleDataStore _sampleDataStore;
 
@@ -18,9 +18,9 @@ namespace DotnetCoreCqrsMediatR.Handlers
             _sampleDataStore = sampleDataStore;
         }
 
-        public async Task<List<Wallet>> Handle(GetWalletQuery request, CancellationToken cancellationToken)
+        public async Task<List<WalletReadModel>> Handle(GetWalletQuery request, CancellationToken cancellationToken)
         {
-            return await _sampleDataStore.GetWallets(request.getWalletRequest);
+            return await _sampleDataStore.GetWalletReadModels(request.getWalletReadModelRequest);
         }
     }
 }

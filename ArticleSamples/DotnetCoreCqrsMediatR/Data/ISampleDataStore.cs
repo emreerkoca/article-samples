@@ -7,8 +7,9 @@ namespace DotnetCoreCqrsMediatR.Data
 {
     public interface ISampleDataStore
     {
-        Task<Wallet> AddWallet(Wallet wallet);
-        Task<List<Wallet>> GetWallets(GetWalletRequest getWalletRequest);
-        Task EventPublished(Wallet wallet, string eventName);
+        Task<WalletWriteModel> AddWallet(WalletWriteModel walletWriteModel);
+        Task<List<WalletReadModel>> GetWalletReadModels(GetWalletReadModelRequest getWalletReadModelRequest);
+        Task SetPublishedEvent(WalletWriteModel walletWriteModel, string eventName);
+        Task UpdateWalletReadModel(WalletWriteModel walletWriteModel);
     }
 }

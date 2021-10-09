@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DotnetCoreCqrsMediatR.Queries
 {
-    public record GetWalletQuery(GetWalletRequest getWalletRequest) : IRequest<List<Wallet>>
+    public record GetWalletQuery(GetWalletReadModelRequest getWalletReadModelRequest) : IRequest<List<WalletReadModel>>
     {
     }
 }

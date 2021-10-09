@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DotnetCoreCqrsMediatR.Handlers
 {
-    public class AddWalletHandler : IRequestHandler<AddWalletCommand, Wallet>
+    public class AddWalletHandler : IRequestHandler<AddWalletCommand, WalletWriteModel>
     {
         private readonly ISampleDataStore _sampleDataStore;
         public AddWalletHandler(ISampleDataStore sampleDataStore)
@@ -15,9 +15,9 @@ namespace DotnetCoreCqrsMediatR.Handlers
             _sampleDataStore = sampleDataStore;
         }
 
-        public async Task<Wallet> Handle(AddWalletCommand request, CancellationToken cancellationToken)
+        public async Task<WalletWriteModel> Handle(AddWalletCommand request, CancellationToken cancellationToken)
         {
-            return await _sampleDataStore.AddWallet(request.wallet);
+            return await _sampleDataStore.AddWallet(request.walletWriteModel);
         }
     }
 }
