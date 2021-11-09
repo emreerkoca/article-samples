@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetCoreMiddlewareSample"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoActorHelloWordSample", "ProtoActorHelloWordSample\ProtoActorHelloWordSample.csproj", "{43798831-E004-40C7-B0C3-85D8A61C0DF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetCoreCqrsMediatR", "DotnetCoreCqrsMediatR\DotnetCoreCqrsMediatR.csproj", "{C9A95A6F-1AEA-460F-B1C6-CE062C94B43F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetCoreCqrsMediatR", "DotnetCoreCqrsMediatR\DotnetCoreCqrsMediatR.csproj", "{C9A95A6F-1AEA-460F-B1C6-CE062C94B43F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetCoreStackExchangeRedisSample", "DotnetCoreStackExchangeRedisSample\DotnetCoreStackExchangeRedisSample.csproj", "{CE192847-9CEA-4A41-9AC3-0DF3F2FBA45C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{C9A95A6F-1AEA-460F-B1C6-CE062C94B43F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9A95A6F-1AEA-460F-B1C6-CE062C94B43F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9A95A6F-1AEA-460F-B1C6-CE062C94B43F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE192847-9CEA-4A41-9AC3-0DF3F2FBA45C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE192847-9CEA-4A41-9AC3-0DF3F2FBA45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE192847-9CEA-4A41-9AC3-0DF3F2FBA45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE192847-9CEA-4A41-9AC3-0DF3F2FBA45C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
