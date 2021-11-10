@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
+using StackExchange.Redis;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +15,6 @@ namespace DotnetCoreStackExchangeRedisSample.Controllers
     {
 
         private readonly ILogger<ArticleController> _logger;
-        private readonly IDistributedCache _distributedCache;
 
         List<Article> articleListFromDatabase = new List<Article>()
         {
@@ -25,10 +22,9 @@ namespace DotnetCoreStackExchangeRedisSample.Controllers
             new Article { Id = 2, Name = "Article 2", Content = "Sample Content 2" },
         };
 
-        public ArticleController(ILogger<ArticleController> logger, IDistributedCache distributedCache)
+        public ArticleController(ILogger<ArticleController> logger)
         {
             _logger = logger;
-            _distributedCache = distributedCache;
         }
 
         [HttpGet]
@@ -37,11 +33,14 @@ namespace DotnetCoreStackExchangeRedisSample.Controllers
             var cacheKey = "article-list";
             List<Article> articleList = null;
 
-            var articleListFromCache = await _distributedCache.GetAsync(cacheKey);
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost:6379");
+            IDatabase database = redis.GetDatabase();
 
-            if (articleListFromCache != null)
+            var articleListFromCache = await database.StringGetAsync(cacheKey);
+
+            if (articleListFromCache.HasValue)
             {
-                articleList = JsonConvert.DeserializeObject<List<Article>>(Encoding.UTF8.GetString(articleListFromCache));
+                articleList = JsonConvert.DeserializeObject<List<Article>>(articleListFromCache);
 
                 _logger.LogInformation("Article List object is getting from cache.");
             }
@@ -50,11 +49,8 @@ namespace DotnetCoreStackExchangeRedisSample.Controllers
                 articleList = articleListFromDatabase;
 
                 var serializedArticleList = JsonConvert.SerializeObject(articleList);
-                var encodedArticleList = Encoding.UTF8.GetBytes(serializedArticleList);
-                var options = new DistributedCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromMinutes(5));
 
-                await _distributedCache.SetAsync(cacheKey, encodedArticleList, options);
+                await database.StringSetAsync(cacheKey, serializedArticleList);
 
                 _logger.LogInformation("Article List object is setting to cache.");
             }
