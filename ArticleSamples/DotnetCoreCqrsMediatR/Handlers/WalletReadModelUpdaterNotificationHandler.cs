@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DotnetCoreCqrsMediatR.Handlers
 {
-    public class WalletReadModelUpdaterNotificationHandler : INotificationHandler<WalletReadModelUpdaterNotification>
+    public class WalletReadModelUpdaterNotificationHandler : INotificationHandler<WalletChangedNotification>
     {
         private readonly ISampleDataStore _sampleDataStore;
 
@@ -15,7 +15,7 @@ namespace DotnetCoreCqrsMediatR.Handlers
             _sampleDataStore = sampleDataStore;
         }
 
-        public async Task Handle(WalletReadModelUpdaterNotification notification, CancellationToken cancellationToken)
+        public async Task Handle(WalletChangedNotification notification, CancellationToken cancellationToken)
         {
             await _sampleDataStore.UpdateWalletReadModel(notification.walletWriteModel);
             await Task.CompletedTask;

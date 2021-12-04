@@ -3,5 +3,5 @@ using MediatR;
 
 namespace DotnetCoreCqrsMediatR.Notifications
 {
-    public record WalletChangedEmailNotification(WalletWriteModel walletWriteModel)  : INotification;
+    public record WalletChangedNotification(WalletWriteModel walletWriteModel)  : INotification;
 }
