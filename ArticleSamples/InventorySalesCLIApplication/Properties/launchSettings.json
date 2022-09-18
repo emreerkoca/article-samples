@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "InventorySalesCLIApplication": {
+      "commandName": "Project",
+      "commandLineArgs": "--file InventorySalesCLIApplication.runtimeconfig.json"
+    }
+  }
+}
